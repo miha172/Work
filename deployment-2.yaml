@@ -19,4 +19,4 @@ spec:
         - name : site-test2
           image: httpd:latest
           ports:
-            containerPort: 80
+            - containerPort: 80
