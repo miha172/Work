@@ -1,0 +1,22 @@
+apiVersion : apps/v1
+kind: Deployment
+metadata:
+  name: my-deploy1-replicas
+  labels:
+    app  : my-k8s-application
+    owner: MikhailBaloban
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+     project: test2
+  template:
+    metadata:
+      labels:
+        project: test2
+    spec:
+      containers:
+        - name : site-test2
+          image: httpd:latest
+          ports:
+            containerPort: 80
