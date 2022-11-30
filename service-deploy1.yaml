@@ -1,0 +1,38 @@
+apiVersion : apps/v1
+kind: Deployment
+metadata:
+  name: my-deploy
+  labels:
+    app  : my-k8s-apps
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+     project: test
+  template:
+    metadata:
+      labels:
+        project: test
+    spec:
+      containers:
+        - name : web-test
+          image: httpd:latest
+          ports:
+            - containerPort: 80
+  
+  ---
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-pod-serice
+  labels:
+    owner: MikhailBalaban
+spec:
+  selector:
+    project: test
+  ports:
+    - name: app-listener
+      protocol: TCP
+      port: 80
+      targetPort: 80
+  type: NodePort
